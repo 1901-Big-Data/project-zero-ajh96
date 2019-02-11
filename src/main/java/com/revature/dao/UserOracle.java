@@ -98,7 +98,6 @@ public class UserOracle implements UserDao{
 			System.out.println("Welcome " + username + " to JDBC Online Banking! Be sure to save your login information somewhere secure!");
 			return Optional.of(user);
 		} catch (Exception e) {
-			System.out.println(e);
 			System.out.println("Username already registered. Use the Member login feature to log in.");
 			return Optional.empty();
 		}
@@ -212,7 +211,6 @@ Connection connect = ConnectionUtil.getConnection();
 			ps.executeQuery();
 			return Optional.empty();
 		} catch (SQLException e) {
-			System.out.println(e);
 			System.out.println("You do not own the selected account. Access denied.");
 			return Optional.empty();
 		} catch (Exception e) {
