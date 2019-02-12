@@ -306,6 +306,7 @@ Connection connect = ConnectionUtil.getConnection();
 			return Optional.empty();
 		}
 		try {
+			//ensure user is not overdrafting from account
 			String checkFunds = "select balance from accounts where account_id = ? and account_owner = ?";
 			PreparedStatement ps = connect.prepareStatement(checkFunds);
 			ps.setInt(1, id);
@@ -316,6 +317,26 @@ Connection connect = ConnectionUtil.getConnection();
 			if (checkBalance < balance) {
 				throw new Exception("Overdraft Error");
 			}
+			
+			//check if user owns account id
+			String checkOwnership1 = "select balance from accounts where account_id = ? and account_owner = ?";
+			ps = connect.prepareStatement(checkOwnership1);
+			ps.setInt(1, id);
+			ps.setString(2, username);
+			rs = ps.executeQuery();
+			rs.next();
+			Double Ownership1 = rs.getDouble(1);
+			
+			//check if user owns account id2
+			String checkOwnership2 = "select balance from accounts where account_id = ? and account_owner = ?";
+			ps = connect.prepareStatement(checkOwnership2);
+			ps.setInt(1, id2);
+			ps.setString(2, username);
+			rs = ps.executeQuery();
+			rs.next();
+			Double Ownership2 = rs.getDouble(1);
+			
+			//if passes all checks, actually modify account values
 			String sql = "update accounts set balance = -? + (select balance from accounts where account_id = ?) where account_id = ? and account_owner = ?";
 			ps = connect.prepareStatement(sql);
 			ps.setDouble(1, balance);
@@ -351,7 +372,7 @@ Connection connect = ConnectionUtil.getConnection();
 			ps.executeQuery();
 			return Optional.empty();
 		} catch (SQLException e) {
-			System.out.println("You do not own the selected account. Access denied.");
+			System.out.println("You do not own selected account(s). Access denied.");
 			return Optional.empty();
 		} catch (Exception e) {
 			System.out.println("Overdraft Error: Account " + id + " has insufficient funds.");

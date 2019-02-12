@@ -76,6 +76,7 @@ public class Menus extends UserInput{
 					}
 				} catch (NoSuchElementException e) {
 					System.out.println("Unable to login.");
+					System.out.println("----------------------------------------------");
 				}
 				break;
 			} else if (input == 2) {
@@ -92,6 +93,7 @@ public class Menus extends UserInput{
 					}
 				} catch (NoSuchElementException e) {
 					System.out.println("Unable to login.");
+					System.out.println("----------------------------------------------");
 				}
 				break;
 			} else if (input == 9) {
@@ -129,12 +131,15 @@ public class Menus extends UserInput{
 					userAcc = userService.getAllAccounts(username).get();
 					if (userAcc.isEmpty()) {
 						System.out.println("You currently have no accounts open. Use option '2' to create a new account.");
+						System.out.println("----------------------------------------------");
 					}
 					for (int u = 0; u < userAcc.size(); u++) {
 						System.out.println(userAcc.get(u));
 					}
+					System.out.println("----------------------------------------------");
 				} catch (NoSuchElementException e) {
 					System.out.println("Failed to fetch accounts.");
+					System.out.println("----------------------------------------------");
 				}
 			} else if (input == 2) {
 				createAccount(username);
@@ -164,6 +169,7 @@ public class Menus extends UserInput{
 			userAcc = userService.getAllAccounts(username).get();
 			if (userAcc.isEmpty()) {
 				System.out.println("You currently have no accounts open. Use option '2' to create a new account.");
+				System.out.println("----------------------------------------------");
 			}
 			for (int u = 0; u < userAcc.size(); u++) {
 				System.out.println(userAcc.get(u));
@@ -173,8 +179,10 @@ public class Menus extends UserInput{
 			System.out.println("Enter the amount to be withdrawn (format xx.xx): ");
 			Double amount = getBalance();
 			UserServices.getServices().withdrawFromAccount(id, amount, username);
+			System.out.println("----------------------------------------------");
 		} catch (NoSuchElementException e) {
 			System.out.println("Failed to fetch accounts.");
+			System.out.println("----------------------------------------------");
 		}
 	}
 	
@@ -185,6 +193,7 @@ public class Menus extends UserInput{
 			userAcc = userService.getAllAccounts(username).get();
 			if (userAcc.isEmpty()) {
 				System.out.println("You currently have no accounts open. Use option '2' to create a new account.");
+				System.out.println("----------------------------------------------");
 			}
 			for (int u = 0; u < userAcc.size(); u++) {
 				System.out.println(userAcc.get(u));
@@ -194,8 +203,10 @@ public class Menus extends UserInput{
 			System.out.println("Enter the amount to be deposited (format xx.xx): ");
 			Double amount = getBalance();
 			UserServices.getServices().depositIntoAccount(id, amount, username);
+			System.out.println("----------------------------------------------");
 		} catch (NoSuchElementException e) {
 			System.out.println("Failed to fetch accounts.");
+			System.out.println("----------------------------------------------");
 		}
 	}
 	
@@ -206,6 +217,7 @@ public class Menus extends UserInput{
 			userAcc = userService.getAllAccounts(username).get();
 			if (userAcc.isEmpty()) {
 				System.out.println("You currently have no accounts open. Use option '2' to create a new account.");
+				System.out.println("----------------------------------------------");
 			}
 			for (int u = 0; u < userAcc.size(); u++) {
 				System.out.println(userAcc.get(u));
@@ -217,8 +229,10 @@ public class Menus extends UserInput{
 			System.out.println("Enter the id# of the account that you wish to deposit into: ");
 			Integer id2 = getInput();
 			UserServices.getServices().transferBetweenTwoAccounts(id, amount, id2, username);
+			System.out.println("----------------------------------------------");
 		} catch (NoSuchElementException e) {
 			System.out.println("Failed to fetch accounts.");
+			System.out.println("----------------------------------------------");
 		}
 	}
 	
@@ -227,8 +241,10 @@ public class Menus extends UserInput{
 		String name = getStringInput();
 		try {
 			UserServices.getServices().createNewBankAccounts(name, username);
+			System.out.println("----------------------------------------------");
 		} catch (NoSuchElementException e) {
 			System.out.println("Error.");
+			System.out.println("----------------------------------------------");
 		}
 		
 	}
@@ -240,6 +256,7 @@ public class Menus extends UserInput{
 			userAcc = userService.getAllAccounts(username).get();
 			if (userAcc.isEmpty()) {
 				System.out.println("You currently have no accounts open. Use option '2' to create a new account.");
+				System.out.println("----------------------------------------------");
 			}
 			for (int u = 0; u < userAcc.size(); u++) {
 				System.out.println(userAcc.get(u));
@@ -251,11 +268,14 @@ public class Menus extends UserInput{
 			String confirm = getStringInput();
 			if (confirm.equals("Confirm")) {
 				UserServices.getServices().deleteBankAccount(id, username);
+				System.out.println("----------------------------------------------");
 			} else {
 				System.out.println("Closure canceled. Returning to menu...");
+				System.out.println("----------------------------------------------");
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println("Failed to fetch accounts.");
+			System.out.println("----------------------------------------------");
 		}
 	}
 	
@@ -279,11 +299,14 @@ public class Menus extends UserInput{
 			String confirmation = getStringInput();
 			if (confirmation.equals("Confirm")) {
 				UserServices.getServices().modifyUsers(id, firstname, lastname, email);
+				System.out.println("----------------------------------------------");
 			} else {
 				System.out.println("Modification canceled. Returning to menu...");
+				System.out.println("----------------------------------------------");
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println("Unable to collect user.");
+			System.out.println("----------------------------------------------");
 		}
 	}
 	
@@ -301,11 +324,14 @@ public class Menus extends UserInput{
 			String confirmation = getStringInput();
 			if (confirmation.equals("Confirm")) {
 				UserServices.getServices().deleteUsers(id);
+				System.out.println("----------------------------------------------");
 			} else {
 				System.out.println("User deletion canceled. Returning to menu...");
+				System.out.println("----------------------------------------------");
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println("Unable to collect user.");
+			System.out.println("----------------------------------------------");
 		}
 	}
 	
@@ -329,8 +355,10 @@ public class Menus extends UserInput{
 					for (int u = 0; u < userInfo.size(); u++) {
 						System.out.println(userInfo.get(u));
 					}
+					System.out.println("----------------------------------------------");
 				} catch (NoSuchElementException e) {
 					System.out.println("Unable to collect users.");
+					System.out.println("----------------------------------------------");
 				}
 			} else if (input == 2) {
 				createNewUser();
