@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserInput.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Calculator</a> &gt; <a href="index.source.html" class="el_package">com.revature.JDBCBank</a> &gt; <span class="el_source">UserInput.java</span></div><h1>UserInput.java</h1><pre class="source lang-java linenums">package com.revature.JDBCBank;
+
+import java.util.Scanner;
+
+<span class="nc" id="L5">public class UserInput {</span>
+	@SuppressWarnings(&quot;resource&quot;)
+	static int getInput() {
+<span class="nc" id="L8">		boolean check = false;</span>
+<span class="nc" id="L9">		int i = 0;</span>
+<span class="nc bnc" id="L10" title="All 2 branches missed.">		while (check != true) {</span>
+			try {
+<span class="nc" id="L12">				check = true;</span>
+<span class="nc" id="L13">				Scanner user = new Scanner(System.in);</span>
+<span class="nc" id="L14">				i = user.nextInt();	</span>
+<span class="nc" id="L15">			} catch(Exception e) {</span>
+<span class="nc" id="L16">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L17">				System.out.println(&quot;Input only accepts numbers (0-9). Please try again...&quot;);</span>
+<span class="nc" id="L18">				check = false;</span>
+<span class="nc" id="L19">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+		}
+<span class="nc" id="L22">	return i;</span>
+	}
+	
+	@SuppressWarnings(&quot;resource&quot;)
+	static String getStringInput() {
+<span class="nc" id="L27">		String s = new String();</span>
+<span class="nc" id="L28">		Scanner string = new Scanner(System.in);</span>
+<span class="nc" id="L29">		s = string.nextLine();</span>
+<span class="nc" id="L30">		return s;</span>
+	}
+	
+	@SuppressWarnings(&quot;resource&quot;)
+	static double getBalance() {
+<span class="nc" id="L35">		boolean check = false;</span>
+<span class="nc" id="L36">		double i = 0;</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		while (check != true) {</span>
+			try {
+<span class="nc" id="L39">				check = true;</span>
+<span class="nc" id="L40">				Scanner user = new Scanner(System.in);</span>
+<span class="nc" id="L41">				i = user.nextDouble();	</span>
+<span class="nc" id="L42">			} catch(Exception e) {</span>
+<span class="nc" id="L43">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L44">				System.out.println(&quot;Input only accepts withdrawls/deposits in the form of 'xx.xx'. Please try again...&quot;);</span>
+<span class="nc" id="L45">				check = false;</span>
+<span class="nc" id="L46">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+		}
+<span class="nc" id="L49">	return i;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

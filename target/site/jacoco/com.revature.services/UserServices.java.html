@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserServices.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Calculator</a> &gt; <a href="index.source.html" class="el_package">com.revature.services</a> &gt; <span class="el_source">UserServices.java</span></div><h1>UserServices.java</h1><pre class="source lang-java linenums">package com.revature.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.revature.JDBCBank.UserAccounts;
+import com.revature.JDBCBank.UserInfo;
+import com.revature.dao.UserDao;
+import com.revature.dao.UserOracle;
+
+<span class="fc" id="L11">public class UserServices {</span>
+	private static UserServices userservice;
+<span class="fc" id="L13">	final static UserDao userDao = UserOracle.getDao();</span>
+	public static UserServices getServices() {
+<span class="fc bfc" id="L15" title="All 2 branches covered.">		if (userservice == null) {</span>
+<span class="fc" id="L16">			userservice = new UserServices();</span>
+		}
+<span class="fc" id="L18">	return userservice;</span>
+	}
+	
+	public Optional&lt;List&lt;UserInfo&gt;&gt; getUsers() {
+<span class="fc" id="L22">		return userDao.getAllUsers();</span>
+	}
+	
+	
+	public Optional&lt;UserInfo&gt; deleteUsers(Integer id) {
+<span class="nc" id="L27">		return userDao.deleteUser(id);</span>
+	}
+
+	public Optional&lt;UserInfo&gt; createNewUsers(String username, String password, String firstname, String lastname,
+			String email, Integer mod) {
+<span class="nc" id="L32">		return userDao.createNewUser(username, password, firstname, lastname, email, mod);</span>
+	}
+
+	public Optional&lt;Boolean&gt; logIntoBank(String username, String password, Integer moderator) {
+<span class="fc" id="L36">		return userDao.logIn(username, password, moderator);</span>
+	}
+
+	public Optional&lt;List&lt;UserAccounts&gt;&gt; getAllAccounts(String username) {
+<span class="fc" id="L40">		return userDao.getUserAccounts(username);</span>
+	}
+
+	public Optional&lt;UserAccounts&gt; createNewBankAccounts(String name, String username) {
+<span class="nc" id="L44">		return userDao.createNewAccount(name, username);</span>
+	}
+
+	public Optional&lt;UserAccounts&gt; deleteBankAccount(Integer id, String username) {
+<span class="nc" id="L48">		return userDao.deleteAccount(id, username);</span>
+	}
+
+	public Optional&lt;UserAccounts&gt; depositIntoAccount(Integer id, Double balance, String username) {
+<span class="fc" id="L52">		return userDao.depositAccount(id, balance, username);</span>
+	}
+
+	public Optional&lt;UserAccounts&gt; withdrawFromAccount(Integer id, Double balance, String username) {
+<span class="fc" id="L56">		return userDao.withdrawAccount(id, balance, username);</span>
+	}
+
+	public Optional&lt;UserAccounts&gt; transferBetweenTwoAccounts(Integer id, Double balance, Integer id2, String username) {
+<span class="fc" id="L60">		return userDao.transferBetweenAccounts(id, balance, id2, username);</span>
+	}
+	
+	public Optional&lt;UserInfo&gt; modifyUsers(Integer id, String firstname, String lastname, String email) {
+<span class="nc" id="L64">		return userDao.modifyUser(id, firstname, lastname, email);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

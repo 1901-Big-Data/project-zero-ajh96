@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Menus.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Calculator</a> &gt; <a href="index.source.html" class="el_package">com.revature.JDBCBank</a> &gt; <span class="el_source">Menus.java</span></div><h1>Menus.java</h1><pre class="source lang-java linenums">package com.revature.JDBCBank;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import com.revature.services.UserServices;
+
+<span class="nc" id="L10">public class Menus extends UserInput{</span>
+	static void openMenu() {
+<span class="nc" id="L12">		Integer input = 0;</span>
+<span class="nc bnc" id="L13" title="All 2 branches missed.">		while (input != 9) {</span>
+<span class="nc" id="L14">			System.out.println(&quot;Welcome to JDBC Online Banking! Please select an option: \n&quot; </span>
+					+ &quot;1. Log into existing account.\n&quot;
+					+ &quot;2. Create new account.\n&quot;
+					+ &quot;9. Exit. \n&quot;
+					+ &quot;----------------------------------------------&quot;);
+<span class="nc" id="L19">			input = getInput();</span>
+<span class="nc" id="L20">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">			if (input == 1) {</span>
+<span class="nc" id="L22">				logIn();</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">			} else if (input == 2) {</span>
+<span class="nc" id="L24">				createNewUser();</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">			} else if (input == 9) {</span>
+<span class="nc" id="L26">				break;</span>
+			} else {
+<span class="nc" id="L28">				System.out.println(&quot;Menu doesn't exist. Reloading main menu...&quot;);</span>
+<span class="nc" id="L29">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+		}
+<span class="nc" id="L32">		System.out.println(&quot;Thank you for using JDBC Online Banking! Have a great day!&quot;);</span>
+<span class="nc" id="L33">	}</span>
+	
+	static void createNewUser() {
+<span class="nc" id="L36">		System.out.println(&quot;Enter new username: &quot;);</span>
+<span class="nc" id="L37">		String username = getStringInput();</span>
+<span class="nc" id="L38">		System.out.println(&quot;Enter new password: &quot;);</span>
+<span class="nc" id="L39">		String password = getStringInput();</span>
+<span class="nc" id="L40">		System.out.println(&quot;Enter your first name: &quot;);</span>
+<span class="nc" id="L41">		String firstname = getStringInput();</span>
+<span class="nc" id="L42">		System.out.println(&quot;Enter your last name: &quot;);</span>
+<span class="nc" id="L43">		String lastname = getStringInput();</span>
+<span class="nc" id="L44">		System.out.println(&quot;Enter your email address: &quot;);</span>
+<span class="nc" id="L45">		String email = getStringInput();</span>
+		try {
+<span class="nc" id="L47">			UserServices.getServices().createNewUsers(username, password, firstname, lastname, email, 0);</span>
+<span class="nc" id="L48">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L49">			System.out.println(&quot;Error.&quot;);</span>
+		}
+		
+<span class="nc" id="L52">	}</span>
+	
+	static void logIn() {
+<span class="nc" id="L55">		System.out.println(&quot;Login homepage. Please select an option: \n&quot; + &quot;1. Member login. \n&quot; + &quot;2. Moderator login. \n&quot;</span>
+				+ &quot;9. Back to main menu.&quot;);
+<span class="nc" id="L57">		String username = new String();</span>
+<span class="nc" id="L58">		String password = new String();</span>
+<span class="nc" id="L59">		Integer input = getInput();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">		if (input == 10) {</span>
+<span class="nc" id="L61">			input = 0;</span>
+		}
+<span class="nc" id="L63">		System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		while (input != 10) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">			if (input == 1) {</span>
+<span class="nc" id="L66">				System.out.println(&quot;Member Login Menu \n&quot; + &quot;Enter username:&quot;);</span>
+<span class="nc" id="L67">				username = getStringInput();</span>
+<span class="nc" id="L68">				System.out.println(&quot;Enter password:&quot;);</span>
+<span class="nc" id="L69">				password = getStringInput();</span>
+<span class="nc" id="L70">				System.out.println(&quot;Attempting to log in...&quot;);</span>
+<span class="nc" id="L71">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+				try {
+<span class="nc" id="L73">					Optional&lt;Boolean&gt; login = UserServices.getServices().logIntoBank(username, password, 0);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">					if (login.get() == true) {</span>
+<span class="nc" id="L75">						bankingMenu(username);</span>
+					}
+<span class="nc" id="L77">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L78">					System.out.println(&quot;Unable to login.&quot;);</span>
+<span class="nc" id="L79">					System.out.println(&quot;----------------------------------------------&quot;);</span>
+				}
+<span class="nc" id="L81">				break;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">			} else if (input == 2) {</span>
+<span class="nc" id="L83">				System.out.println(&quot;Moderator Login Menu \n&quot; + &quot;Enter username:&quot;);</span>
+<span class="nc" id="L84">				username = getStringInput();</span>
+<span class="nc" id="L85">				System.out.println(&quot;Enter password:&quot;);</span>
+<span class="nc" id="L86">				password = getStringInput();</span>
+<span class="nc" id="L87">				System.out.println(&quot;Attempting to log in as moderator...&quot;);</span>
+<span class="nc" id="L88">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+				try {
+<span class="nc" id="L90">					Optional&lt;Boolean&gt; login = UserServices.getServices().logIntoBank(username, password, 1);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">					if (login.get() == true) {</span>
+<span class="nc" id="L92">						modMenu(username);</span>
+					}
+<span class="nc" id="L94">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L95">					System.out.println(&quot;Unable to login.&quot;);</span>
+<span class="nc" id="L96">					System.out.println(&quot;----------------------------------------------&quot;);</span>
+				}
+<span class="nc" id="L98">				break;</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">			} else if (input == 9) {</span>
+<span class="nc" id="L100">				System.out.println(&quot;Returning to main menu...&quot;);</span>
+<span class="nc" id="L101">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L102">				break;</span>
+			} else {
+<span class="nc" id="L104">				System.out.println(&quot;Menu doesn't exist. Please select an option: \n&quot; + &quot;1. Member login. \n&quot; + &quot;2. Moderator login. \n&quot;</span>
+						+ &quot;9. Back to main menu.&quot;);
+<span class="nc" id="L106">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L107">				input = getInput();</span>
+			}
+		}
+	
+<span class="nc" id="L111">	}</span>
+	
+	static void bankingMenu(String username) {
+<span class="nc" id="L114">		System.out.println(&quot;Welcome back &quot; + username + &quot;!&quot;);</span>
+<span class="nc" id="L115">		Integer input = 0;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">		while (input != 9) {</span>
+<span class="nc" id="L117">			System.out.println(&quot;What would you like to do? \n&quot;</span>
+					+ &quot;1. View account balances. \n&quot;
+					+ &quot;2. Create new account. \n&quot;
+					+ &quot;3. Close account. \n&quot;
+					+ &quot;4. Deposit into account. \n&quot;
+					+ &quot;5. Withdraw from account. \n&quot;
+					+ &quot;6. Transfer funds between accounts. \n&quot;
+					+ &quot;9. Log out.&quot;);
+<span class="nc" id="L125">			input = getInput();</span>
+<span class="nc" id="L126">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">			if (input == 1) {</span>
+<span class="nc" id="L128">				UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L129">				List&lt;UserAccounts&gt; userAcc = new ArrayList&lt;&gt;();</span>
+				try {
+<span class="nc" id="L131">					userAcc = userService.getAllAccounts(username).get();</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">					if (userAcc.isEmpty()) {</span>
+<span class="nc" id="L133">						System.out.println(&quot;You currently have no accounts open. Use option '2' to create a new account.&quot;);</span>
+<span class="nc" id="L134">						System.out.println(&quot;----------------------------------------------&quot;);</span>
+					}
+<span class="nc bnc" id="L136" title="All 2 branches missed.">					for (int u = 0; u &lt; userAcc.size(); u++) {</span>
+<span class="nc" id="L137">						System.out.println(userAcc.get(u));</span>
+					}
+<span class="nc" id="L139">					System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L140">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L141">					System.out.println(&quot;Failed to fetch accounts.&quot;);</span>
+<span class="nc" id="L142">					System.out.println(&quot;----------------------------------------------&quot;);</span>
+				}
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			} else if (input == 2) {</span>
+<span class="nc" id="L145">				createAccount(username);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">			} else if (input == 3) {</span>
+<span class="nc" id="L147">				deleteAccount(username);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">			} else if (input == 4) {</span>
+<span class="nc" id="L149">				depositMenu(username);</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">			} else if (input == 5) {</span>
+<span class="nc" id="L151">				withdrawalMenu(username);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">			} else if (input == 6) {</span>
+<span class="nc" id="L153">				transferMenu(username);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">			} else if (input == 9) {</span>
+<span class="nc" id="L155">				System.out.println(&quot;Logging out...&quot;);</span>
+<span class="nc" id="L156">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L157">				break;</span>
+			} else {
+<span class="nc" id="L159">				System.out.println(&quot;Menu doesn't exist. Choose options 1-6, or type '9' to log out.&quot;);</span>
+<span class="nc" id="L160">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+		}
+<span class="nc" id="L163">	}</span>
+	
+	static void withdrawalMenu(String username) {
+<span class="nc" id="L166">		UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L167">		List&lt;UserAccounts&gt; userAcc = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L169">			userAcc = userService.getAllAccounts(username).get();</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">			if (userAcc.isEmpty()) {</span>
+<span class="nc" id="L171">				System.out.println(&quot;You currently have no accounts open. Use option '2' to create a new account.&quot;);</span>
+<span class="nc" id="L172">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc bnc" id="L174" title="All 2 branches missed.">			for (int u = 0; u &lt; userAcc.size(); u++) {</span>
+<span class="nc" id="L175">				System.out.println(userAcc.get(u));</span>
+			}
+<span class="nc" id="L177">			System.out.println(&quot;Type the id# of the account you wish to withdraw from: &quot;);</span>
+<span class="nc" id="L178">			Integer id = getInput();</span>
+<span class="nc" id="L179">			System.out.println(&quot;Enter the amount to be withdrawn (format xx.xx): &quot;);</span>
+<span class="nc" id="L180">			Double amount = getBalance();</span>
+<span class="nc" id="L181">			UserServices.getServices().withdrawFromAccount(id, amount, username);</span>
+<span class="nc" id="L182">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L183">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L184">			System.out.println(&quot;Failed to fetch accounts.&quot;);</span>
+<span class="nc" id="L185">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+<span class="nc" id="L187">	}</span>
+	
+	static void depositMenu(String username) {
+<span class="nc" id="L190">		UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L191">		List&lt;UserAccounts&gt; userAcc = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L193">			userAcc = userService.getAllAccounts(username).get();</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">			if (userAcc.isEmpty()) {</span>
+<span class="nc" id="L195">				System.out.println(&quot;You currently have no accounts open. Use option '2' to create a new account.&quot;);</span>
+<span class="nc" id="L196">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc bnc" id="L198" title="All 2 branches missed.">			for (int u = 0; u &lt; userAcc.size(); u++) {</span>
+<span class="nc" id="L199">				System.out.println(userAcc.get(u));</span>
+			}
+<span class="nc" id="L201">			System.out.println(&quot;Type the id# of the account you wish to deposit into: &quot;);</span>
+<span class="nc" id="L202">			Integer id = getInput();</span>
+<span class="nc" id="L203">			System.out.println(&quot;Enter the amount to be deposited (format xx.xx): &quot;);</span>
+<span class="nc" id="L204">			Double amount = getBalance();</span>
+<span class="nc" id="L205">			UserServices.getServices().depositIntoAccount(id, amount, username);</span>
+<span class="nc" id="L206">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L207">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L208">			System.out.println(&quot;Failed to fetch accounts.&quot;);</span>
+<span class="nc" id="L209">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+<span class="nc" id="L211">	}</span>
+	
+	static void transferMenu(String username) {
+<span class="nc" id="L214">		UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L215">		List&lt;UserAccounts&gt; userAcc = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L217">			userAcc = userService.getAllAccounts(username).get();</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">			if (userAcc.isEmpty()) {</span>
+<span class="nc" id="L219">				System.out.println(&quot;You currently have no accounts open. Use option '2' to create a new account.&quot;);</span>
+<span class="nc" id="L220">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc bnc" id="L222" title="All 2 branches missed.">			for (int u = 0; u &lt; userAcc.size(); u++) {</span>
+<span class="nc" id="L223">				System.out.println(userAcc.get(u));</span>
+			}
+<span class="nc" id="L225">			System.out.println(&quot;Type the id# of the account you wish to transfer from: &quot;);</span>
+<span class="nc" id="L226">			Integer id = getInput();</span>
+<span class="nc" id="L227">			System.out.println(&quot;Enter the amount to be transfered (format xx.xx): &quot;);</span>
+<span class="nc" id="L228">			Double amount = getBalance();</span>
+<span class="nc" id="L229">			System.out.println(&quot;Enter the id# of the account that you wish to deposit into: &quot;);</span>
+<span class="nc" id="L230">			Integer id2 = getInput();</span>
+<span class="nc" id="L231">			UserServices.getServices().transferBetweenTwoAccounts(id, amount, id2, username);</span>
+<span class="nc" id="L232">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L233">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L234">			System.out.println(&quot;Failed to fetch accounts.&quot;);</span>
+<span class="nc" id="L235">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+<span class="nc" id="L237">	}</span>
+	
+	static void createAccount(String username) {
+<span class="nc" id="L240">		System.out.println(&quot;Enter name of new account: &quot;);</span>
+<span class="nc" id="L241">		String name = getStringInput();</span>
+		try {
+<span class="nc" id="L243">			UserServices.getServices().createNewBankAccounts(name, username);</span>
+<span class="nc" id="L244">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L245">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L246">			System.out.println(&quot;Error.&quot;);</span>
+<span class="nc" id="L247">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+		
+<span class="nc" id="L250">	}</span>
+	
+	static void deleteAccount(String username) {
+<span class="nc" id="L253">		UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L254">		List&lt;UserAccounts&gt; userAcc = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L256">			userAcc = userService.getAllAccounts(username).get();</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">			if (userAcc.isEmpty()) {</span>
+<span class="nc" id="L258">				System.out.println(&quot;You currently have no accounts open. Use option '2' to create a new account.&quot;);</span>
+<span class="nc" id="L259">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc bnc" id="L261" title="All 2 branches missed.">			for (int u = 0; u &lt; userAcc.size(); u++) {</span>
+<span class="nc" id="L262">				System.out.println(userAcc.get(u));</span>
+			}
+<span class="nc" id="L264">			System.out.println(&quot;Type the id# of the account you wish to close: &quot;);</span>
+<span class="nc" id="L265">			System.out.println(&quot;*Note: You cannot close an account that still has available funds remaining.*&quot;);</span>
+<span class="nc" id="L266">			Integer id = getInput();</span>
+<span class="nc" id="L267">			System.out.println(&quot;Warning: Account id# &quot; + id + &quot; will be closed. Type 'Confirm' to confirm closure.&quot;);</span>
+<span class="nc" id="L268">			String confirm = getStringInput();</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">			if (confirm.equals(&quot;Confirm&quot;)) {</span>
+<span class="nc" id="L270">				UserServices.getServices().deleteBankAccount(id, username);</span>
+<span class="nc" id="L271">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L272">			} else {</span>
+<span class="nc" id="L273">				System.out.println(&quot;Closure canceled. Returning to menu...&quot;);</span>
+<span class="nc" id="L274">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc" id="L276">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L277">			System.out.println(&quot;Failed to fetch accounts.&quot;);</span>
+<span class="nc" id="L278">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+<span class="nc" id="L280">	}</span>
+	
+	static void modifyUser() {
+<span class="nc" id="L283">		UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L284">		List&lt;UserInfo&gt; userInfo = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L286">			userInfo = userService.getUsers().get();</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">			for (int u = 0; u &lt; userInfo.size(); u++) {</span>
+<span class="nc" id="L288">				System.out.println(userInfo.get(u));</span>
+			}
+<span class="nc" id="L290">			System.out.println(&quot;Input login id of user to be modified: &quot;);</span>
+<span class="nc" id="L291">			Integer id = getInput();</span>
+<span class="nc" id="L292">			System.out.println(&quot;Input new first name: &quot;);</span>
+<span class="nc" id="L293">			String firstname = getStringInput();</span>
+<span class="nc" id="L294">			System.out.println(&quot;Input new last name: &quot;);</span>
+<span class="nc" id="L295">			String lastname = getStringInput();</span>
+<span class="nc" id="L296">			System.out.println(&quot;Input new email address: &quot;);</span>
+<span class="nc" id="L297">			String email = getStringInput();</span>
+<span class="nc" id="L298">			System.out.println(&quot;Warning: Changes made to login id# &quot; + id + &quot; will be permanent. Type 'Confirm' to confirm modifications.&quot;);</span>
+<span class="nc" id="L299">			String confirmation = getStringInput();</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">			if (confirmation.equals(&quot;Confirm&quot;)) {</span>
+<span class="nc" id="L301">				UserServices.getServices().modifyUsers(id, firstname, lastname, email);</span>
+<span class="nc" id="L302">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L303">			} else {</span>
+<span class="nc" id="L304">				System.out.println(&quot;Modification canceled. Returning to menu...&quot;);</span>
+<span class="nc" id="L305">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc" id="L307">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L308">			System.out.println(&quot;Unable to collect user.&quot;);</span>
+<span class="nc" id="L309">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+<span class="nc" id="L311">	}</span>
+	
+	static void deleteUser() {
+<span class="nc" id="L314">		UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L315">		List&lt;UserInfo&gt; userInfo = new ArrayList&lt;&gt;();</span>
+		try {
+<span class="nc" id="L317">			userInfo = userService.getUsers().get();</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">			for (int u = 0; u &lt; userInfo.size(); u++) {</span>
+<span class="nc" id="L319">				System.out.println(userInfo.get(u));</span>
+			}
+<span class="nc" id="L321">			System.out.println(&quot;Input login id of user to be deleted: &quot;);</span>
+<span class="nc" id="L322">			Integer id = getInput();</span>
+<span class="nc" id="L323">			System.out.println(&quot;Warning: termination of login id# &quot; + id + &quot; will also terminate any personal accounts held by that user. Type 'Confirm' to confirm user deletion.&quot;);</span>
+<span class="nc" id="L324">			String confirmation = getStringInput();</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">			if (confirmation.equals(&quot;Confirm&quot;)) {</span>
+<span class="nc" id="L326">				UserServices.getServices().deleteUsers(id);</span>
+<span class="nc" id="L327">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L328">			} else {</span>
+<span class="nc" id="L329">				System.out.println(&quot;User deletion canceled. Returning to menu...&quot;);</span>
+<span class="nc" id="L330">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+<span class="nc" id="L332">		} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L333">			System.out.println(&quot;Unable to collect user.&quot;);</span>
+<span class="nc" id="L334">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+		}
+<span class="nc" id="L336">	}</span>
+	
+	static void modMenu(String username) {
+<span class="nc" id="L339">		System.out.println(&quot;Moderator: &quot; + username);</span>
+<span class="nc" id="L340">		Integer input = 0;</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">		while (input != 9) {</span>
+<span class="nc" id="L342">			System.out.println(&quot;Mod menu: \n&quot;</span>
+					+ &quot;1. View user database. \n&quot;
+					+ &quot;2. Create new user. \n&quot;
+					+ &quot;3. Modify existing user. \n&quot;
+					+ &quot;4. Delete existing user. \n&quot;
+					+ &quot;9. Log out.&quot;);
+<span class="nc" id="L348">			input = getInput();</span>
+<span class="nc" id="L349">			System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">			if (input == 1) {</span>
+<span class="nc" id="L351">				UserServices userService = UserServices.getServices();</span>
+<span class="nc" id="L352">				List&lt;UserInfo&gt; userInfo = new ArrayList&lt;&gt;();</span>
+				try {
+<span class="nc" id="L354">					userInfo = userService.getUsers().get();</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">					for (int u = 0; u &lt; userInfo.size(); u++) {</span>
+<span class="nc" id="L356">						System.out.println(userInfo.get(u));</span>
+					}
+<span class="nc" id="L358">					System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L359">				} catch (NoSuchElementException e) {</span>
+<span class="nc" id="L360">					System.out.println(&quot;Unable to collect users.&quot;);</span>
+<span class="nc" id="L361">					System.out.println(&quot;----------------------------------------------&quot;);</span>
+				}
+<span class="nc bnc" id="L363" title="All 2 branches missed.">			} else if (input == 2) {</span>
+<span class="nc" id="L364">				createNewUser();</span>
+<span class="nc bnc" id="L365" title="All 2 branches missed.">			} else if (input == 3) {</span>
+<span class="nc" id="L366">				modifyUser();</span>
+<span class="nc bnc" id="L367" title="All 2 branches missed.">			} else if (input == 4) {</span>
+<span class="nc" id="L368">				deleteUser();</span>
+<span class="nc bnc" id="L369" title="All 2 branches missed.">			} else if (input == 9) {</span>
+<span class="nc" id="L370">				System.out.println(&quot;Logging out...&quot;);</span>
+<span class="nc" id="L371">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+<span class="nc" id="L372">				break;</span>
+			} else {
+<span class="nc" id="L374">				System.out.println(&quot;Menu doesn't exist. Choose options '1-4', or type '9' to log out.&quot;);</span>
+<span class="nc" id="L375">				System.out.println(&quot;----------------------------------------------&quot;);</span>
+			}
+		}
+<span class="nc" id="L378">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
