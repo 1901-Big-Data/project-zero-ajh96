@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Calculator,com.revature.JDBCBank,UserInfo,323,24,62,0,78,9,49,1,18,1
+Calculator,com.revature.JDBCBank,UserInput,81,0,4,0,29,0,6,0,4,0
+Calculator,com.revature.JDBCBank,UserAccounts,159,12,30,0,41,5,25,1,10,1
+Calculator,com.revature.JDBCBank,Menus,920,0,82,0,270,0,54,0,13,0
+Calculator,com.revature.JDBCBank,Main,8,0,0,0,4,0,2,0,2,0
+Calculator,com.revature.dao,UserOracle,391,633,18,20,117,165,17,15,5,8
+Calculator,com.revature.services,UserServices,30,46,0,2,5,11,5,10,5,9
+Calculator,com.revature.util,ConnectionUtil,23,52,0,2,7,18,2,3,2,2
